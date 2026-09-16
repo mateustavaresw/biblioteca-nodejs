@@ -1,13 +1,14 @@
 const caminhoArquivo = process.argv;
 const link = caminhoArquivo[2];
+const trataErro = require('./erros/trataErro')
 const fs = require("fs");
+
 fs.readFile(link, "utf-8", (erro, texto) => {
   try {
-    if (erro) throw erro
-    contaPalavra(texto);
+    if(erro) throw(erro)
+    contaPalavra(texto)
   } catch (erro) {
-    if (erro.code === "ENOENT") console.log("erro que esperava");
-    else console.log("outro erro");
+    console.log(trataErro(erro))
   }
 });
 function contaPalavra(texto) {
